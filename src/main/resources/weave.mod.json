@@ -1,0 +1,7 @@
+{
+  "name": "Legacy Debug Menu",
+  "modId": "legacydebug",
+  "mixinConfigs": [
+    "legacydebug.mixins.json"
+  ]
+}
