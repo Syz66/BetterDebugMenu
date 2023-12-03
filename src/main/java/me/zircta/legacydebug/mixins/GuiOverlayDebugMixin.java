@@ -5,59 +5,69 @@ import me.zircta.legacydebug.utils.DebugUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiOverlayDebug;
 import net.minecraft.client.gui.ScaledResolution;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 
-import java.awt.*;
 import java.util.List;
 
+/**
+ * Mixin class to modify the rendering of debug information in Minecraft's debug overlay.
+ * Renders debug information on the left and right sides of the screen.
+ */
 @Mixin(GuiOverlayDebug.class)
-public abstract class GuiOverlayDebugMixin {
-    @Shadow
-    public final FontRenderer fontRenderer;
+public class GuiOverlayDebugMixin {
+    @Mutable @Final @Shadow public FontRenderer fontRenderer;
 
-    protected GuiOverlayDebugMixin(FontRenderer fontRenderer) {
+    /**
+     * Mixin constructor for GuiOverlayDebugMixin.
+     */
+    public GuiOverlayDebugMixin(FontRenderer fontRenderer) {
         this.fontRenderer = fontRenderer;
     }
 
     /**
-     * @author Minecraft
+     * Overwrites the renderDebugInfoLeft method to display custom debug information on the left side of the screen.
+     * @author Minecraft // Syz66
      * @reason Legacy Debug Menu
      */
     @Overwrite
     public void renderDebugInfoLeft() {
+        // Retrieve debug information from DebugUtils for the left display
         List<String> debugInfo = DebugUtils.getDebugInfoLeft();
 
-        for(int lineIndex = 0; lineIndex < debugInfo.size(); ++lineIndex) {
+        // Render each line of debug information
+        for (int lineIndex = 0; lineIndex < debugInfo.size(); ++lineIndex) {
             String debugLine = debugInfo.get(lineIndex);
-            if(!Strings.isNullOrEmpty(debugLine)) {
+            if (!Strings.isNullOrEmpty(debugLine)) {
                 int lineHeight = this.fontRenderer.FONT_HEIGHT;
                 int yOffset = 2 + lineHeight * lineIndex;
-                int textColor = new Color(224, 224, 224).getRGB();
-                this.fontRenderer.drawString(debugLine, 2, yOffset, textColor, true);
+                // Render the debug line on the left side of the screen
+                this.fontRenderer.drawString(debugLine, 2, yOffset, DebugUtils.textColor, true);
             }
         }
     }
 
     /**
-     * @author Minecraft
+     * Overwrites the renderDebugInfoRight method to display custom debug information on the right side of the screen.
+     * @author Minecraft // Syz66
      * @reason Legacy Debug Menu
      */
     @Overwrite
     public void renderDebugInfoRight(ScaledResolution scaledResolution) {
+        // Retrieve debug information from DebugUtils for the right display
         List<String> debugInfo = DebugUtils.getDebugInfoRight();
 
-        for(int lineIndex = 0; lineIndex < debugInfo.size(); ++lineIndex) {
+        // Render each line of debug information
+        for (int lineIndex = 0; lineIndex < debugInfo.size(); ++lineIndex) {
             String debugLine = debugInfo.get(lineIndex);
-            if(!Strings.isNullOrEmpty(debugLine)) {
+            if (!Strings.isNullOrEmpty(debugLine)) {
                 int lineHeight = this.fontRenderer.FONT_HEIGHT;
                 int lineWidth = this.fontRenderer.getStringWidth(debugLine);
                 int xPos = scaledResolution.getScaledWidth() - 2 - lineWidth;
                 int yPos = 2 + lineHeight * lineIndex;
-                int textColor = new Color(224, 224, 224).getRGB();
-                this.fontRenderer.drawString(debugLine, xPos, yPos, textColor, true);
+                // Render the debug line on the right side of the screen
+                this.fontRenderer.drawString(debugLine, xPos, yPos, DebugUtils.textColor, true);
             }
         }
     }
 }
+

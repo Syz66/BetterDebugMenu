@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.zircta"
-version = "1.0"
+version = "1.1"
 
 minecraft.version("1.8.9")
 
@@ -20,4 +20,12 @@ dependencies {
 
 tasks.compileJava {
     options.release.set(17)
+}
+
+sourceSets {
+    main {
+        resources {
+            exclude("**/image.png")
+        }
+    }
 }
