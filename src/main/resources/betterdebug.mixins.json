@@ -1,7 +1,7 @@
 {
-  "required": true,
+  "required": false,
   "compatibilityLevel": "JAVA_8",
-  "package": "me.zircta.legacydebug.mixins",
+  "package": "me.zircta.betterdebug.mixins",
   "mixins": [
     "EntityRendererMixin",
     "GuiIngameMixin",
