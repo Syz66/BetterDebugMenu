@@ -1,11 +1,13 @@
 {
-  "name": "Legacy Debug Menu",
+  "name": "Better Debug Menu",
   "author": "Syz66",
-  "version": "1.1",
+  "version": "2.0",
   "link": "https://github.com/Syz66/LegacyDebugMenu",
-
-  "modId": "legacydebug",
+  "modId": "betterdebug",
   "mixinConfigs": [
-    "legacydebug.mixins.json"
+    "betterdebug.mixins.json"
+  ],
+  "entrypoints": [
+    "me.zircta.betterdebug.BetterDebugMenu"
   ]
 }
