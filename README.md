@@ -1,5 +1,5 @@
 # Better Debug Menu
-Allows customization for the Minecraft debug menu.
+Allows you to customize the Minecraft debug menu.
 
 ---
 

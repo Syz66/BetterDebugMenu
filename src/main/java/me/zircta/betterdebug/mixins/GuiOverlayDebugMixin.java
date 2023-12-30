@@ -14,15 +14,18 @@ import java.util.List;
 
 @Mixin(value = GuiOverlayDebug.class)
 public abstract class GuiOverlayDebugMixin {
-    @Mutable @Final @Shadow public FontRenderer fontRenderer;
-
-    @Shadow public abstract List<String> getDebugInfoRight();
-
-    @Shadow public abstract List<String> call();
+    @Mutable @Final @Shadow
+    public FontRenderer fontRenderer;
 
     public GuiOverlayDebugMixin(FontRenderer fontRenderer) {
         this.fontRenderer = fontRenderer;
     }
+
+    @Shadow
+    public abstract List<String> getDebugInfoRight();
+
+    @Shadow
+    public abstract List<String> call();
 
     /**
      * @author Syz66
@@ -45,7 +48,8 @@ public abstract class GuiOverlayDebugMixin {
                 int lineHeight = this.fontRenderer.FONT_HEIGHT;
                 int lineWidth = this.fontRenderer.getStringWidth(debugLine);
                 int yPos = 2 + lineHeight * lineIndex;
-                if (config.background) Gui.drawRect(1, yPos - 1, 2 + lineWidth + 1, yPos + lineHeight - 1, config.backgroundColor.getRGB());
+                if (config.background)
+                    Gui.drawRect(1, yPos - 1, 2 + lineWidth + 1, yPos + lineHeight - 1, config.backgroundColor.getRGB());
                 this.fontRenderer.drawString(debugLine, 2, yPos, config.textColor.getRGB(), config.shadow);
             }
         }
@@ -73,7 +77,8 @@ public abstract class GuiOverlayDebugMixin {
                 int lineWidth = this.fontRenderer.getStringWidth(debugLine);
                 int xPos = scaledResolution.getScaledWidth() - 2 - lineWidth;
                 int yPos = 2 + lineHeight * lineIndex;
-                if (config.background) Gui.drawRect(xPos - 1, yPos - 1, xPos + lineWidth + 1, yPos + lineHeight - 1, config.backgroundColor.getRGB());
+                if (config.background)
+                    Gui.drawRect(xPos - 1, yPos - 1, xPos + lineWidth + 1, yPos + lineHeight - 1, config.backgroundColor.getRGB());
                 this.fontRenderer.drawString(debugLine, xPos, yPos, config.textColor.getRGB(), config.shadow);
             }
         }
