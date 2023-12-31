@@ -21,13 +21,9 @@ val ZENITH_CORE_VERSION = "1.4.1"
 val CONCENTRA_VERSION = "0.1.2"
 
 group = PACKAGE
-version = "2.0"
+version = "2.1"
 
 minecraft.version("1.8.9")
-
-repositories {
-    mavenCentral()
-}
 
 repositories {
     mavenCentral()
@@ -44,10 +40,6 @@ dependencies {
     implementation("cc.polyfrost:oneconfig-1.8.9-forge:0.2.0-alpha+")
     compileOnly("com.github.Weave-MC:Weave-Loader:v0.2.4")
     compileOnly("org.spongepowered:mixin:0.8.5")
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 val relocate: TaskProvider<Task> = tasks.register("relocate") {
